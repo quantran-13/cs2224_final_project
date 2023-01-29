@@ -1,0 +1,18 @@
+{
+  "fastapi_app": {
+    "method": "fastapi_app",
+    "args": {}
+  },
+  "clip_model": {
+    "method": "load_clip_model",
+    "args": {
+      "model_weights": "resources/ViT-B-32.pt"
+    }
+  },
+  "oxford5k_clip_index": {
+    "method": "load_faiss_index",
+    "args": {
+      "index_file": "resources/oxford5k_clip_index"
+    }
+  }
+}
