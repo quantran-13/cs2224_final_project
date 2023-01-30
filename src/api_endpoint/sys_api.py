@@ -9,12 +9,6 @@ app = RESOURCE_MAP["fastapi_app"]
 app_logger = logging.getLogger("app_logger")
 
 
-@app.get("/")
-async def home():
-    app_logger.info("Hello world message")
-    return {"message": "API is ready!"}
-
-
 @app.get("/ping", response_model=ResponseModel)
 @api_log_no_response_content
 async def ping() -> ResponseModel:

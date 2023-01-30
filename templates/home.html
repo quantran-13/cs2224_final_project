@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block page_content %}
+<main role="main" class="container-fluid text-justify mt-5">
+    <div class="row mx-5">
+        <div class="col mx-auto">
+            <!-- Upload image input-->
+            <form action="/upload-image" method="POST" enctype="multipart/form-data" align="center">
+                <div class="input-group rounded-pill bg-white shadow px-4 py-2 mb-3">
+                    <input id="upload-image" class="form-control border-0" name="image" type="file"
+                        accept=".png, .jpg, .jpeg, .jfif, .webp, .gif" onchange="readURL(this);">
+                    <label id="upload-label" for="upload-image" class="font-weight-light text-muted">Choose file</label>
+
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary rounded-pill px-3">
+                            <small class="text-uppercase font-weight-bold text-white">Search</small>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Uploaded image area-->
+        <div class="col mx-auto">
+            <div class="image-area mt-4">
+                <img id="image-result" src="#" alt="" class="img-fluid d-block">
+            </div>
+        </div>
+    </div>
+</main>
+<!-- /.container -->
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

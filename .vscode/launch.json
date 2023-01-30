@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "Python: App File",
+      "type": "python",
+      "request": "launch",
+      "program": "app.py",
+      "args": ["dev"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
+

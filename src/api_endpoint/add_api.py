@@ -114,3 +114,5 @@ def add_api() -> None:
         import src.api_endpoint.const_api
     if "sys_api" not in sys.modules:
         import src.api_endpoint.sys_api
+    if "home_api" not in sys.modules:
+        import src.api_endpoint.home_api
