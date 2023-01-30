@@ -1,3 +1,6 @@
+import json
+
+
 clip_models = {
     # "RN50",
     # "RN101",
@@ -12,3 +15,10 @@ clip_models = {
 
 
 indexes = ["oxford5k_clip"]
+
+
+with open("./data/id_image.json", "r") as f:
+    data = json.load(f)
+
+id_mapping = {_[0]: _[1] for _ in data}
+id_mapping_reverse = {_[1]: _[0] for _ in data}

@@ -8,31 +8,34 @@
 
 {% block page_content %}
 <main role="main" class="container-fluid text-justify mt-5">
+    <!-- Upload image input-->
     <div class="row mx-5">
         <div class="col mx-auto">
-            <!-- Upload image input-->
-            <form action="/upload-image" method="POST" enctype="multipart/form-data" align="center">
-                <div class="input-group rounded-pill bg-white shadow px-4 py-2 mb-3">
-                    <input id="upload-image" class="form-control border-0" name="image" type="file"
-                        accept=".png, .jpg, .jpeg, .jfif, .webp, .gif" onchange="readURL(this);">
-                    <label id="upload-label" for="upload-image" class="font-weight-light text-muted">Choose file</label>
+            <div class="input-group rounded-pill bg-white shadow px-4 py-2 mb-3">
+                <input id="upload-image" class="form-control border-0" name="image" type="file"
+                    accept=".png, .jpg, .jpeg, .jfif, .webp" onchange="readURL(this);">
+                <label id="upload-label" for="upload-image" class="font-weight-light text-muted">Choose file</label>
 
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary rounded-pill px-3">
-                            <small class="text-uppercase font-weight-bold text-white">Search</small>
-                        </button>
-                    </div>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary rounded-pill px-3" id="buttonSearch">
+                        <small class="text-uppercase font-weight-bold text-white">Search</small>
+                    </button>
                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <!-- Uploaded image area-->
-        <div class="col mx-auto">
-            <div class="image-area mt-4">
-                <img id="image-result" src="#" alt="" class="img-fluid d-block">
             </div>
         </div>
+    </div>
+
+    <!-- Uploaded image area-->
+    <div class="row">
+        <div class="col mx-auto m-5">
+            <canvas id="canvas">
+                Your browser does not support the HTML5 canvas element.
+            </canvas>
+        </div>
+    </div>
+
+    <div id="predict-result" class="row d-flex justify-content-center mb-3">
+        {{ result|safe }}
     </div>
 </main>
 <!-- /.container -->
