@@ -36,6 +36,7 @@ const readURL = (input) => {
 
                 var cropper = canvas.cropper({
                     // aspectRatio: 1 / 1, // 16/9 ,
+                    autoCropArea: 1,
                     zoomOnWheel: false,
                     zoomOnTouch: false,
                     viewMode: 2,

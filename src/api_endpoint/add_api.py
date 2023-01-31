@@ -32,13 +32,26 @@ def api_log(func: Callable) -> Any:
         try:
             response = await func(*args, **kwargs)
             if type(response) == ResponseModel:
-                app_logger.info("%s request: finish: %s, %s.\n", func.__name__, str(response.status_code), str(response.content))
+                app_logger.info(
+                    "%s request: finish: %s, %s.\n",
+                    func.__name__,
+                    str(response.status_code),
+                    str(response.content),
+                )
             else:
-                app_logger.info("%s request: finish: %s.\n", func.__name__, str(response))
+                app_logger.info(
+                    "%s request: finish: %s.\n", func.__name__, str(response)
+                )
             return response
         except Exception as e:
-            error_logger.error("%s request: error: %s.\n", func.__name__, e, exc_info=True)
-            return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f"{func.__name__} request: error: {e}")
+            error_logger.error(
+                "%s request: error: %s.\n", func.__name__, e, exc_info=True
+            )
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=f"{func.__name__} request: error: {e}",
+            )
+
     return api_log_decorator
 
 
@@ -60,13 +73,23 @@ def api_log_no_response_content(func: Callable) -> Any:
         try:
             response = await func(*args, **kwargs)
             if type(response) == ResponseModel:
-                app_logger.info("%s request: finish: %s.\n", func.__name__, str(response.status_code))
+                app_logger.info(
+                    "%s request: finish: %s.\n",
+                    func.__name__,
+                    str(response.status_code),
+                )
             else:
                 app_logger.info("%s request: finish.\n", func.__name__)
             return response
         except Exception as e:
-            error_logger.error("%s request: error: %s.\n", func.__name__, e, exc_info=True)
-            return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f"{func.__name__} request: error: {e}")
+            error_logger.error(
+                "%s request: error: %s.\n", func.__name__, e, exc_info=True
+            )
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=f"{func.__name__} request: error: {e}",
+            )
+
     return api_log_decorator
 
 
@@ -93,13 +116,59 @@ def api_log_aischema(func: Callable) -> Any:
         try:
             response = await func(*args, **kwargs)
             if type(response) == ResponseModel:
-                app_logger.info("%s request: finish: %s, %s.\n", func.__name__, str(response.status_code), str(response.content))
+                app_logger.info(
+                    "%s request: finish: %s, %s.\n",
+                    func.__name__,
+                    str(response.status_code),
+                    str(response.content),
+                )
             else:
-                app_logger.info("%s request: finish: %s.\n", func.__name__, str(response))
+                app_logger.info(
+                    "%s request: finish: %s.\n", func.__name__, str(response)
+                )
             return response
         except Exception as e:
-            error_logger.error("%s request: error: %s.\n", func.__name__, e, exc_info=True)
-            return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f"{func.__name__} request: error: {e}")
+            error_logger.error(
+                "%s request: error: %s.\n", func.__name__, e, exc_info=True
+            )
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=f"{func.__name__} request: error: {e}",
+            )
+
+    return api_log_decorator
+
+
+def api_log_aischema_no_response_content(func: Callable) -> Any:
+    @functools.wraps(func)
+    async def api_log_decorator(*args, **kwargs):
+        log_info = {}
+        for key in kwargs["input_map"].__dir__():
+            if str(key) in ["session", "top_results"]:
+                value = getattr(kwargs["input_map"], key)
+                log_info[key] = value
+
+        app_logger.info("%s request: start: %s", func.__name__, str(log_info))
+        try:
+            response = await func(*args, **kwargs)
+            if type(response) == ResponseModel:
+                app_logger.info(
+                    "%s request: finish: %s.\n",
+                    func.__name__,
+                    str(response.status_code),
+                )
+            else:
+                app_logger.info("%s request: finish.\n", func.__name__)
+            return response
+        except Exception as e:
+            error_logger.error(
+                "%s request: error: %s.\n", func.__name__, e, exc_info=True
+            )
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=f"{func.__name__} request: error: {e}",
+            )
+
     return api_log_decorator
 
 

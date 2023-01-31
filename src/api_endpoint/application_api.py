@@ -1,13 +1,14 @@
 import logging
 
-from fastapi import FastAPI, Response
-from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from src.const.global_map import RESOURCE_MAP
 from src.const import const_map as CONST_MAP
-from src.api_endpoint.add_api import api_log_aischema
+from src.api_endpoint.add_api import (
+    api_log_aischema,
+    api_log_aischema_no_response_content,
+)
 from src.utils.basemodel import app_schemas as schemas
 from src.utils.basemodel.response_schemas import create_response, ResponseModel
 from src.encode_image import encode_image_func
@@ -70,7 +71,7 @@ async def search(input_map: schemas.SearchImageSchema) -> ResponseModel:
 
 
 @app.post("/v2/search", response_model=ResponseModel)
-@api_log_aischema
+@api_log_aischema_no_response_content
 async def search(input_map: schemas.SearchImageSchemaV2) -> ResponseModel:
     base64_image = input_map.base64_image
     utils_logger.info(
