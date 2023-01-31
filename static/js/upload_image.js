@@ -68,8 +68,8 @@ $("#buttonSearch").click(function () {
         .toDataURL("image/png");
 
     const xhr = new XMLHttpRequest();
-    // xhr.open("POST", "http://localhost:8000/v2/search");
-    xhr.open("POST", "http://20.78.62.44:8000/v2/search");
+    xhr.open("POST", "http://localhost:8000/v2/search");
+    // xhr.open("POST", "http://20.78.62.44:8000/v2/search");
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     const body = JSON.stringify({
         session: "test",
