@@ -12,18 +12,17 @@ _label_content_li_start = """
             <img class="align-self-center" style="max-width: 100px; height: auto;" src="data:image/png;base64, {}" />
         </div>
         <div class="flex-grow-1 ms-3">
-            <ul class="list-unstyled">
-                <ul>
+            <ul class="list-group list-group-flush">
 """
 
 
 _label_content_li_nested = """
-<li>{} - {:.2f}</li>
+<li class="list-group-item" ><p class="font-weight-bold">ID:</p> {}</li>
+<li class="list-group-item" ><p class="font-weight-bold">Score:</p> {:.2f}</li>
 """
 
 
 _label_content_li_end = """
-                </ul>
             </ul>
         </div>
     </div>
